@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu-container {
+    color: #fff;
+    background-color: #5995DA;  /* Blue */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.select-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    width: 900px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select {
+    width: 900px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logins {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login {
+    margin-left: 20px;
+}
+
+.select-style select {
+   width: 268px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   -webkit-appearance: none;
+   background-color: #5995DA;
+   color: #fff;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+.photos-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.photos {
+    width: 900px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.photo-item {
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+  }

@@ -8,6 +8,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 const port = process.env.PORT || 8082;
 
+const usuarioRouter = require('./server/routes/usuarioRouter');
+const loginRouter = require('./server/routes/loginRouter');
+
+app.use('/users', usuarioRouter);
+app.use('/login', loginRouter);
+
 app.get('*', (req, res) => {
     res.status(200).send({
         message: 'Welcome to this API!'

@@ -1,6 +1,6 @@
 // const jwt = require('jsonwebtoken')
 const userCtrl = require('./usuarioController');
-const usuarios = require('../services/usuarioService');
+const usuarios = require('../services/usuarioData');
 const utils = require('../util/util');
 
 // function generateToken(userID) {

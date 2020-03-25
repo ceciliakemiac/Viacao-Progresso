@@ -11,7 +11,7 @@ descrição
 distancia-terra
 periculosidade
 tem-ETs
-comentários (array de id's comentários)
+comentários (array de comentários com os id's dos usuários)
 
 */
 
@@ -27,6 +27,11 @@ const destinos = [
         "distancia-terra": 5.2,
         "periculosidade": 9,
         "tem-ETs": false,
-        "comentários": [1]
+        "comentários": [
+            {
+                "id-usuario": 1,
+                "comentario": "perfeitoo"
+            }
+        ]
     }
 ]

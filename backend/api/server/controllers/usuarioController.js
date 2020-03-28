@@ -1,15 +1,13 @@
 const jwt = require('jsonwebtoken')
-const usuarios = require('../services/usuarioData');
 const utils = require('../util/util');
+const fs = require('fs');
+
+const data = JSON.parse(fs.readFileSync('./api/server/services/usuarioData.json'));
 
 module.exports = {
     getAll(req, res) {
         try {
-            const todosUsuarios = usuarios;
-            return res.status(200).json({
-                message: 'Usuários aqui',
-                data: todosUsuarios
-            });
+            return res.status(200).json({data: data});
         } catch(error) {
             return res.status(400).json({message: error.message});
         }
@@ -18,12 +16,12 @@ module.exports = {
     get(req, res) {
         const id = req.params.id;
         if(!Number(id)) {
-            return res.status(400).json({message: 'Please input a valid numeric value!'});
+            return res.status(400).json({message: 'Informe um valor numérico'});
         }
         try {
-            const user = usuarios[id - 1];
+            const user = data.usuarios[id - 1];
             if(!user) {
-                return res.status(404).json({message: 'Cannot find the user!'});
+                return res.status(404).json({message: 'Não foi possível achar o usuário'});
             } else {
                 return res.status(200).json({data: user});
             }
@@ -34,21 +32,26 @@ module.exports = {
 
     post(req, res) {
         const {nome, senha} = req.body;
-        if (usuarios.find(elem => elem.nome === nome) == undefined) {
+        if (data.usuarios.find(elem => elem.nome === nome) != undefined) {
             return res.status(400).json({message: 'Usuário já cadastrado'});
         }
         
         const newUser = {
-            id: usuarios.length + 1,
+            id: data.usuarios.length + 1,
             nome: nome,
-            senha: senha
+            senha: senha,
+            status: '',
+            ondeFui: [],
+            ondeNãoVou: [],
+            listas: [],
+            viagens: []
         }
 
         try {
-            usuarios.push(newUser);
-            const token = utils.generateToken(usuarios.length);
+            data.usuarios.push(newUser);
+            fs.writeFileSync('./api/server/services/usuarioData.json', JSON.stringify(data));
 
-            return res.header('x-auth-token', token).send(newUser);
+            return res.status(200).json({data: newUser});
         } catch(error) {
             return res.status(400).json({message: error.message});
         }

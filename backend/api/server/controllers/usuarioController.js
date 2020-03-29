@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken')
-const utils = require('../util/util');
 const fs = require('fs');
 
 const data = JSON.parse(fs.readFileSync('./api/server/services/usuarioData.json'));
@@ -9,7 +7,7 @@ module.exports = {
         try {
             return res.status(200).json({data: data});
         } catch(error) {
-            return res.status(400).json({message: error.message});
+            return res.status(400).json({erro: error.message});
         }
     },
 
@@ -26,7 +24,7 @@ module.exports = {
                 return res.status(200).json({data: user});
             }
         } catch(error) {
-            return res.status(400).json({erro: error});
+            return res.status(400).json({erro: error.message});
         }
     },
 
@@ -53,7 +51,7 @@ module.exports = {
 
             return res.status(200).json({data: newUser});
         } catch(error) {
-            return res.status(400).json({message: error.message});
+            return res.status(400).json({erro: error.message});
         }
     }
 }

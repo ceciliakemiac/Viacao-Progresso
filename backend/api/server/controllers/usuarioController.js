@@ -40,7 +40,7 @@ module.exports = {
             senha: senha,
             status: '',
             ondeFui: [],
-            ondeNãoVou: [],
+            ondeNaoVou: [],
             listas: [],
             viagens: []
         }

@@ -1,9 +1,24 @@
 const fs = require('fs');
+const _ = require('lodash');
 
-const data = JSON.parse(fs.readFileSync('./api/server/services/destinoData.json'));
+let data = JSON.parse(fs.readFileSync('./api/server/data/destinoData.json'));
 
 module.exports = {
     getAll(req, res) {
+        const query = {
+            filter: {
+                tipo: req.query.tipo,
+            },
+            sort: {
+                orderBy: req.query.orderBy || 'nome',
+            }
+        }
+        
+        if(query.filter.tipo) {
+            data.destinos = data.destinos.filter(elem => elem.tipo === query.filter.tipo);
+        }
+        data.destinos = _.orderBy(data.destinos, query.sort.orderBy);
+
         try {
             return res.status(200).json({data: data});
         } catch(error) {
@@ -41,7 +56,7 @@ module.exports = {
 
         try {
             data.destinos[id - 1] = destino;
-            fs.writeFileSync('./api/server/services/destinoData.json', JSON.stringify(data));
+            fs.writeFileSync('./api/server/data/destinoData.json', JSON.stringify(data));
             
             return res.status(200).json({data: data});
         } catch(error) {

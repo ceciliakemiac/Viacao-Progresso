@@ -1,19 +1,15 @@
-// const jwt = require('jsonwebtoken')
+const fs = require('fs');
 const userCtrl = require('./usuarioController');
-const usuarios = require('../services/usuarioData');
 const utils = require('../util/util');
 
-// function generateToken(userID) {
-//     const token = jwt.sign({id: userID}, 'supersecret');
-//     return token;
-// }
+const data = JSON.parse(fs.readFileSync('./api/server/data/usuarioData.json'));
 
 module.exports = {
     login(req, res) {
         const {nome, senha} = req.body;
         let usuario = {"id": 0, "nome": '', "senha": ''}
         
-        for (let user of usuarios) {
+        for (let user of data.usuarios) {
             console.log(user.nome + " " + nome);
             if (user.nome === nome) {
                 console.log(user.nome);

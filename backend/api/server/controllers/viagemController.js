@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const dataUsuario = JSON.parse(fs.readFileSync('./api/server/services/usuarioData.json'));
-const dataDestino = JSON.parse(fs.readFileSync('./api/server/services/destinoData.json'));
+const dataUsuario = JSON.parse(fs.readFileSync('./api/server/data/usuarioData.json'));
+const dataDestino = JSON.parse(fs.readFileSync('./api/server/data/destinoData.json'));
 
 module.exports = {
     post(req, res) {
@@ -21,7 +21,7 @@ module.exports = {
 
         try {
             dataUsuario.usuarios[userId - 1].viagens.push(novaViagem);
-            fs.writeFileSync('./api/server/services/usuarioData.json', JSON.stringify(dataUsuario));
+            fs.writeFileSync('./api/server/data/usuarioData.json', JSON.stringify(dataUsuario));
 
             return res.status(200).json({data: dataUsuario});
         } catch(error) {

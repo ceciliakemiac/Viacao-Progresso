@@ -79,6 +79,47 @@
             "periculosidade":9,
             "temETs":false,
             "comentarios":[]
+        },
+        {
+            "id":6,
+            "nome":"Urano",
+            "imagem":"",
+            "imagens":[],
+            "tipo":"planeta",
+            "nota":0,
+            "descricao":"Urano é o sétimo planeta a contar do Sol e o terceiro maior (em diâmetro). Urano é maior em diâmetro mas com menor massa que Neptuno. Urano era a antiga divindade grega dos Céus, o deus supremo mais antigo. Urano era filho e companheiro de Gaia, pai de Cronus (Saturno), dos Ciclopes e Titãs (antecessores dos deuses do Olimpo). A cor azulada de Urano é o resultado da absorção de luz vermelha do metano nas camadas superiores da atmosfera. Podem existir bandas coloridas tal como em Júpiter mas estão escondidas da vista pela camada superior de metano. Tal como os outros planetas gasosos, Urano tem anéis. E tal como Júpiter, são muito escuros, mas como os de Saturno, são compostos na sua maioria por grandes partículas até 10 metros em diâmetro, sem contar com partículas de pó fino.",
+            "periculosidade":9,
+            "temETs":false,
+            "comentarios":[]
+        },
+        {
+            "id":7,
+            "nome":"Netuno",
+            "imagem":"",
+            "imagens":[],
+            "tipo":"planeta",
+            "nota":0,
+            "descricao":"Netuno é o oitavo planeta a partir do Sol. É um gigante gasoso, bem como Júpiter, Saturno e Urano. Está distante 4,5 bilhões de quilômetros do Sol e demora 156 anos terrestres para completar uma órbita. Foi descoberto em 1846 e recebeu o nome do deus romano do mar. O planeta Netuno é composto, principalmente, de água muito quente, amônia e metano em seu núcleo, que tem aproximadamente o tamanho da Terra. A atmosfera é formada por hidrogênio, hélio e metano. Assim como Urano, a cor azulada brilhante de Netuno resulta da elevada quantidade de metano na atmosfera. As 13 luas de Netuno são nomeadas após vários deuses do mar e ninfas na mitologia grega. A principal lua de Netuno, Tritão, foi descoberta pelo matemático inglês William Lassell, que era um astrônomo amador.",
+            "periculosidade":9,
+            "temETs":false,
+            "comentarios":[]
+        },
+        {
+            "id":8,
+            "nome":"Plutão",
+            "imagem":"",
+            "imagens":[],
+            "tipo":"planeta",
+            "nota":0,
+            "descricao":"",
+            "periculosidade":8.4,
+            "temETs":false,
+            "comentarios":[
+                {
+                    "idUsuario":3,
+                    "comentario": "Pluto"
+                }
+            ]
         }
     ]
 }

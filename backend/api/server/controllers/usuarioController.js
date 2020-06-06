@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const data = JSON.parse(fs.readFileSync('./api/server/services/usuarioData.json'));
+const data = JSON.parse(fs.readFileSync('./api/server/data/usuarioData.json'));
 
 module.exports = {
     getAll(req, res) {
@@ -47,7 +47,7 @@ module.exports = {
 
         try {
             data.usuarios.push(newUser);
-            fs.writeFileSync('./api/server/services/usuarioData.json', JSON.stringify(data));
+            fs.writeFileSync('./api/server/data/usuarioData.json', JSON.stringify(data));
 
             return res.status(200).json({data: newUser});
         } catch(error) {

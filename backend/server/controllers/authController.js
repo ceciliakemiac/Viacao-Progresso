@@ -2,7 +2,7 @@ const fs = require('fs');
 const userCtrl = require('./usuarioController');
 const utils = require('../util/util');
 
-const data = JSON.parse(fs.readFileSync('./api/server/data/usuarioData.json'));
+const data = JSON.parse(fs.readFileSync('./server/data/usuarioData.json'));
 
 module.exports = {
     login(req, res) {

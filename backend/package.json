@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.js",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
   },
   "keywords": [],
   "author": "",

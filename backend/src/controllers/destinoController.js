@@ -1,16 +1,30 @@
-const fs = require('fs');
-const _ = require('lodash');
-
-let data = JSON.parse(fs.readFileSync('./server/data/destinoData.json'));
+const destinoService = require('../service/destinoService');
 
 module.exports = {
-    getAll(req, res) {
-        
-    },
+	async getAll(req, res) {
+		try {
+			const { tipo } = req.query;
 
-    get(req, res) {
-        
-    },
+			const destinos = await destinoService.getPorTipo(tipo);
 
-    
+			const serializedDestinos = destinos.map(destino => {
+				return {
+					nome: destino.nome,
+					image_url: `http://localhost:8082/imagens/${destino.image1}`,
+				}
+			});
+
+			// console.log('oi')
+			console.log(serializedDestinos);
+
+			return res.status(200).json({
+				data: serializedDestinos,
+			});
+		} catch(err) {
+			return res.status(400).json({
+				message: 'Erro ao encontrar os destinos',
+				erro: err,
+			});
+		}
+	},
 }

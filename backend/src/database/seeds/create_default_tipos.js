@@ -3,7 +3,11 @@ const knex = require('knex');
 module.exports = {
   async seed(knex) {
     try {
-      await knex('tipos').del();
+      await knex.schema.dropTable('tipos');
+      await knex.schema.createTable('tipos', table => {
+        table.increments('id').primary();
+        table.string('tipo').notNullable();
+      });
 
       await knex('tipos').insert([
         {tipo: 'planeta'},

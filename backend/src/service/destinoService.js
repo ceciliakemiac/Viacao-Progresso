@@ -31,13 +31,13 @@ module.exports = {
     if(!id) throw new Error('Id não fornecido');
 
     try {
-      const destino = await knex('destinos').where('id', id);
+      const destinos = await knex('destinos').where('id', id);
       const comentarios = await knex('comentarios')
                                   .where('destino_id', id)
                                   .select('id', 'comentario', 'usuario_id');
 
       return ({
-        destino: destino,
+        destino: destinos[0],
         comentarios: comentarios,
       });
     } catch(err) {

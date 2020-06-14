@@ -58,6 +58,7 @@ module.exports = {
 			return res.status(200).json({
 				data: {
 					destino: destino,
+					image_url: `http://localhost:8082/imagens/${destino.image1}`,
 					comentarios: comentarios,
 				}
 			});

@@ -1,5 +1,4 @@
 const knex = require('../database/connection');
-const { getDestinosPopulares } = require('../controllers/destinoController');
 
 module.exports = {
   async getPorTipo(tipo, orderBy) {

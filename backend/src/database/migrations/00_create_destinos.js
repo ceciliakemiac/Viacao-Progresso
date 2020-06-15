@@ -2,7 +2,10 @@ const knex = require('knex');
 
 module.exports = {
   async up(knex) {
-    return knex.schema.createTable('destinos', table => {
+    return knex.schema.createTable('tipos', table => {
+      table.increments('id').primary();
+      table.string('tipo').notNullable();
+    }).createTable('destinos', table => {
       table.increments('id').primary();
       table.text('descricao').notNullable();
       table.float('nota');
@@ -14,10 +17,7 @@ module.exports = {
       table.string('image3');
       table.string('image4');
       table.string('nome').notNullable();
-      table.string('tipo').references('tipos.tipo');
-    }).createTable('tipos', table => {
-      table.increments('id').primary();
-      table.string('tipo').notNullable();
+      table.integer('tipo').references('tipos.id');
     })
   },
 

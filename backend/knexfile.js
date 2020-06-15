@@ -1,15 +1,19 @@
 const path = require('path');
 
 module.exports = {
-  client: 'sqlite3',
+  client: 'pg',
   connection: {
-    filename: path.resolve(__dirname, 'src', 'database', 'vp.sqlite')
+    host: 'localhost',
+    port: '5434',
+    user: 'viacao_user',
+    password: 'viacao_password',
+    database: 'viacao_progresso',
   },
   migrations: {
     directory: path.resolve(__dirname, 'src', 'database', 'migrations')
   },
   seeds: {
       directory: path.resolve(__dirname, 'src', 'database', 'seeds')
-  },
+  }, 
   useNullAsDefault: true,
 };

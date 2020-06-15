@@ -13,13 +13,27 @@ module.exports = {
     };
 
     try {
-      const insertedId = await knex('comentarios')
-                                    .insert(newComentario);
-      const comentario_id = insertedId[0];
+      const insertedIds = await knex('comentarios').insert(newComentario);
+      const comentario_id = insertedIds[0];
       
       return { comentario_id, newComentario };
     } catch(err) {
       throw err;
     }
-  }
+  },
+
+  async delete(id) {
+    if(!id) throw new Error('Id não fornecido');
+
+    try {
+      const deleted = knex('comentarios')
+                        .where('id', id)
+                        .del();
+
+      return deleted;      
+    } catch(err) {
+      throw err;
+    }
+  },
+
 }

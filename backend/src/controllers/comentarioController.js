@@ -19,4 +19,22 @@ module.exports = {
 			});
     }
   },
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    try {
+      const deleted = await comentarioService.delete(id);
+
+      return res.status(200).json({
+        deleted: deleted,
+      })
+    } catch(err) {
+      return res.status(400).json({
+        message: 'Erro ao deletar comentário',
+        erro: err,
+      })
+    }
+  },
+  
 }

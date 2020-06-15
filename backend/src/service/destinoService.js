@@ -10,9 +10,9 @@ module.exports = {
                               .where('tipo', tipo)
                               .orderBy(orderBy)
                               .select();
-      return destinos;
+      return destinos
     } catch(err) {
-      throw err;
+      return "oi"
     }
   },
 

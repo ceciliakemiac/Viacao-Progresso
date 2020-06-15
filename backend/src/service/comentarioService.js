@@ -13,7 +13,7 @@ module.exports = {
     };
 
     try {
-      const insertedIds = await knex('comentarios').insert(newComentario);
+      const insertedIds = await knex('comentarios').returning('id').insert(newComentario);
       const comentario_id = insertedIds[0];
       
       return { comentario_id, newComentario };

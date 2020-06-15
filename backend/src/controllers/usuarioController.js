@@ -1,17 +1,20 @@
-const fs = require('fs');
-
-const data = JSON.parse(fs.readFileSync('./server/data/usuarioData.json'));
+const usuarioService = require('../service/usuarioService');
 
 module.exports = {
-    getAll(req, res) {
-        
-    },
+    async create(req, res) {
+			const { nome, email, senha } = req.body;
+			
+			try {
+				const { usuario } = await usuarioService.create(nome, email, senha);
 
-    get(req, res) {
-        
-    },
-
-    post(req, res) {
-    
-    },
+				return res.status(200).json({
+					usuario: usuario,
+				})
+			} catch(err) {
+				return res.status(400).json({
+					message: 'Erro ao criar usuário',
+					err: err,
+				})
+			}
+    }
 }

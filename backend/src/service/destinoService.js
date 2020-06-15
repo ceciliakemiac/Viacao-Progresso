@@ -12,7 +12,7 @@ module.exports = {
                               .select();
       return destinos
     } catch(err) {
-      return "oi"
+      throw err;
     }
   },
 

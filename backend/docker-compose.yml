@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+  postgres:
+    image: postgres
+    ports: 
+      - "5434:5432"
+    restart: always
+    environment: 
+      POSTGRES_DB: viacao_progresso
+      POSTGRES_USER: viacao_user
+      POSTGRES_PASSWORD: viacao_password
+    container_name: viacao

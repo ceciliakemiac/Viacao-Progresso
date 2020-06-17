@@ -2,7 +2,8 @@ const comentarioService = require('../service/comentarioService');
 
 module.exports = {
   async create(req, res) {
-    const { comentario, usuario_id, destino_id } = req.body;
+    const { comentario, destino_id } = req.body;
+    const usuario_id = req.user.id;
 
     try {
       const { comentario_id, newComentario } = 
@@ -22,16 +23,17 @@ module.exports = {
 
   async delete(req, res) {
     const { id } = req.params;
+    const usuario_id = req.user.id;
 
     try {
-      const deleted = await comentarioService.delete(id);
+      const deleted = await comentarioService.delete(id, usuario_id);
 
       return res.status(200).json({
         deleted: deleted,
       })
     } catch(err) {
       return res.status(400).json({
-        message: 'Erro ao deletar comentário',
+        message: err.message,
         erro: err,
       })
     }

@@ -22,15 +22,24 @@ module.exports = {
     }
   },
 
-  async delete(id) {
-    if(!id) throw new Error('Id não fornecido');
+  async delete(id, usuario_id) {
+    if(!id || !usuario_id) throw new Error('Id ou Usuário não fornecido');
 
     try {
-      const deleted = knex('comentarios')
-                        .where('id', id)
-                        .del();
+      const retorno = await knex('comentarios').where('id', id);
+      const comentario = retorno[0];
 
-      return deleted;      
+      if(comentario.usuario_id !== usuario_id) {
+        throw new Error('Usuário não pode deletar esse comentário');
+      }
+
+      const deleted = await knex('comentarios')
+                             .where('id', id)
+                             .del();
+
+      return ({
+        deleted: deleted,
+      })     
     } catch(err) {
       throw err;
     }

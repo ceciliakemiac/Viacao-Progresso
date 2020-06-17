@@ -31,12 +31,19 @@ module.exports = {
 
     try {
       const destinos = await knex('destinos').where('id', id);
+      const destino = destinos[0];
+
       const comentarios = await knex('comentarios')
                                   .where('destino_id', id)
                                   .select('id', 'comentario', 'usuario_id');
+      
+      const tipos = await knex('tipos').where('id', destino.tipo);
+      const tipo = tipos[0];
 
+      destino.tipo = tipo;
+      
       return ({
-        destino: destinos[0],
+        destino: destino,
         comentarios: comentarios,
       });
     } catch(err) {

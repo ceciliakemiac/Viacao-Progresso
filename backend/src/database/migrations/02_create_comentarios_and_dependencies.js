@@ -14,6 +14,5 @@ module.exports = {
   async down(knex) {
     return knex.schema
       .dropTable('comentarios')
-      .dropTable('destino_comentarios')
   }
 }

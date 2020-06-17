@@ -22,8 +22,8 @@ module.exports = {
 
   async down(knex) {
     return knex.schema
-      .dropTable('usuarios')
       .dropTable('ondefui_destinos_usuario')
       .dropTable('queroir_destinos_usuario')
+      .dropTable('usuarios')
   }
 }

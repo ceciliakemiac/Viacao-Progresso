@@ -41,7 +41,7 @@ module.exports = {
       const tipo = tipos[0];
 
       destino.tipo = tipo;
-      
+
       return ({
         destino: destino,
         comentarios: comentarios,
@@ -50,4 +50,33 @@ module.exports = {
       throw err;
     }
   },
+
+  async updateNota(nota, id) {
+    if(!nota) throw new Error('Nota não fornecida!');
+    if(!id) throw new Error('Id não fornecido!');
+
+    try {
+      let retorno = await knex('destinos')
+                              .where('id', id)
+                              .select('numNotas', 'nota');
+      let numNotas = retorno[0].numNotas;
+      const notaAntiga = retorno[0].nota;
+
+      const soma = notaAntiga * numNotas + nota;
+
+      numNotas = numNotas + 1;
+      const notaNova = soma / numNotas;
+
+      retorno = await knex('destinos')
+                          .where({id: id})
+                          .update({nota: notaNova, numNotas: numNotas}, ['id', 'nome', 'nota']);
+      const novoDestino = retorno[0];
+
+      return ({
+        destino: novoDestino,
+      })
+    } catch(err) {
+      throw err;
+    }
+  }
 }

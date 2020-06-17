@@ -9,6 +9,7 @@ module.exports = {
       table.increments('id').primary();
       table.text('descricao').notNullable();
       table.float('nota');
+      table.integer('numNotas').unsigned().notNullable();
       table.float('periculosidade');
       table.float('distanciaTerra');
       table.boolean('temETs').notNullable();

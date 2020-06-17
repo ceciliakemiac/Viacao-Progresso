@@ -68,5 +68,23 @@ module.exports = {
 				erro: err,
 			});
 		}
+	},
+
+	async updateNota(req, res) {
+		const { id } = req.params;
+		const { nota } = req.body;
+		
+		try {
+			const { destino } = await destinoService.updateNota(nota, id);
+
+			return res.status(200).json({
+				data: destino,
+			});
+		} catch(err) {
+			return res.status(400).json({
+				message: 'Erro ao atualizar a nota',
+				erro: err,
+			})
+		}
 	}
 }

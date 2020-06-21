@@ -1,5 +1,4 @@
 const knex = require('../database/connection');
-const { create } = require('lodash');
 
 module.exports = {
   async create(nome, email, senha) {
@@ -21,6 +20,32 @@ module.exports = {
       })
     } catch(err) {
       throw err;
+    }
+  },
+
+  async addDestino(favorito, destino_id, usuario_id) {
+    if(!favorito) favorito = false;
+    if(!usuario_id) throw new Error('Usuário não fornecido');
+    if(!destino_id) throw new Error('Destino não fornecido');
+
+    const destino = {
+      favorito: favorito,
+      destino_id: destino_id,
+      usuario_id: usuario_id,
+    }
+
+    try{
+      const retorno = await knex('ondefui_destinos_usuario')
+                              .returning('id')
+                              .insert(destino);
+      const destino_id = retorno[0];
+
+      return ({
+        id: destino_id,
+        destino: destino,
+      });
+    } catch(err) {
+      return 'oi'
     }
   }
 }

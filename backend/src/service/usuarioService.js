@@ -35,6 +35,7 @@ module.exports = {
     }
 
     try{
+      //CONFERIR SE ESTÁ EM QUEROIR PARA DELETAR
       const retorno = await knex('ondefui_destinos_usuario')
                               .returning('id')
                               .insert(destino);
@@ -45,7 +46,33 @@ module.exports = {
         destino: destino,
       });
     } catch(err) {
-      return 'oi'
+      throw err;
+    }
+  },
+
+  async addWantedDestino(destino_id, usuario_id) {
+    if(!destino_id || !usuario_id) {
+      throw new Error('Dados não fornecidos');
+    }
+    
+    const destino = {
+      destino_id: destino_id,
+      usuario_id: usuario_id,
+    }
+
+    try {
+      //CONFERIR SE JÁ NÃO ESTÁ EM ONDEFUI
+      const retorno = await knex('queroir_destinos_usuario')
+                              .returning('id')
+                              .insert(destino);
+      const destino_id = retorno[0];
+
+      return ({
+        id: destino_id,
+        destino: destino,
+      });
+    } catch(err) {
+      throw err;
     }
   }
 }

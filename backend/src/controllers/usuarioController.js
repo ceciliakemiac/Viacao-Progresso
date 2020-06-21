@@ -1,4 +1,5 @@
 const usuarioService = require('../service/usuarioService');
+const { addWantedDestino } = require('../service/usuarioService');
 
 module.exports = {
 	async create(req, res) {
@@ -23,7 +24,26 @@ module.exports = {
 		const usuario_id = req.user.id;
 
 		try {
-			const { destino } = await usuarioService.addDestino(favorito, destino_id, usuario_id);
+			const { id, destino } = await usuarioService.addDestino(favorito, destino_id, usuario_id);
+
+			return res.status(200).json({
+				destino: id,
+				...destino,
+			});
+		} catch(err) {
+			return res.status(400).json({
+				message: err.message,
+				erro: err,
+			});
+		}
+	},
+
+	async addWantedDestino(req, res) {
+		const { destino_id } = req.body;
+		const usuario_id = req.user.id;
+
+		try {
+			const { id, destino } = await usuarioService.addWantedDestino(destino_id, usuario_id);
 
 			return res.status(200).json({
 				destino: id,

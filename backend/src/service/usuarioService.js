@@ -36,13 +36,31 @@ module.exports = {
 
     try{
       //CONFERIR SE ESTÁ EM QUEROIR PARA DELETAR
-      const retorno = await knex('ondefui_destinos_usuario')
-                              .returning('id')
-                              .insert(destino);
-      const destino_id = retorno[0];
+      const trx = await knex.transaction();
+      const queroir = await trx('queroir_destinos_usuario')
+                              .where({usuario_id: usuario_id, destino_id: destino_id})
+                              .select('id');
+      if(queroir.length != 0) {
+        const id = queroir[0].id;
+
+        await trx('queroir_destinos_usuario')
+                .where('id', id)
+                .del();
+      }
+
+      const ondefui = await trx('ondefui_destinos_usuario')
+                        .returning('id')
+                        .insert(destino);
+                    
+      if(!ondefui) {
+        await trx.rollback();
+        throw new Error('Não foi possível adicionar destino');
+      }
+      await trx.commit();
+      const ondefui_id = ondefui[0];
 
       return ({
-        id: destino_id,
+        id: ondefui_id,
         destino: destino,
       });
     } catch(err) {

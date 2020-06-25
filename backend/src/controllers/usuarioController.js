@@ -27,7 +27,7 @@ module.exports = {
 			const { id, destino } = await usuarioService.addDestino(favorito, destino_id, usuario_id);
 
 			return res.status(200).json({
-				destino: id,
+				id: id,
 				...destino,
 			});
 		} catch(err) {

@@ -51,14 +51,15 @@ module.exports = {
     }
   },
 
-  async updateNota(nota, id) {
+  async updateNota(nota, id, usuario_id) {
     if(!nota) throw new Error('Nota não fornecida!');
     if(!id) throw new Error('Id não fornecido!');
+    if(!usuario_id) throw new Error('Usuário não fornecido');
 
     try {
-      let retorno = await knex('destinos')
-                              .where('id', id)
-                              .select('numNotas', 'nota');
+      const retorno = await knex('destinos')
+                            .where('id', id)
+                            .select('numNotas', 'nota');
       let numNotas = retorno[0].numNotas;
       const notaAntiga = retorno[0].nota;
 
@@ -67,10 +68,20 @@ module.exports = {
       numNotas = numNotas + 1;
       const notaNova = soma / numNotas;
 
-      retorno = await knex('destinos')
-                          .where({id: id})
-                          .update({nota: notaNova, numNotas: numNotas}, ['id', 'nome', 'nota']);
-      const novoDestino = retorno[0];
+      const trx = await knex.transaction();
+      await trx('ondefui_destinos_usuario')
+              .where({usuario_id: usuario_id, destino_id: id})
+              .update({nota: nota});
+
+      const novoDestinoRetorno = await trx('destinos')
+                                        .where({id: id})
+                                        .update({nota: notaNova, numNotas: numNotas}, ['id', 'nome', 'nota']);
+      if(!novoDestinoRetorno) {
+        await trx.rollback();
+        throw new Error('Não foi possível atualizar a nota');
+      }
+      await trx.commit();
+      const novoDestino = novoDestinoRetorno[0];
 
       return ({
         destino: novoDestino,

@@ -73,9 +73,10 @@ module.exports = {
 	async updateNota(req, res) {
 		const { id } = req.params;
 		const { nota } = req.body;
+		const usuario_id = req.user.id;
 		
 		try {
-			const { destino } = await destinoService.updateNota(nota, id);
+			const { destino } = await destinoService.updateNota(nota, id, usuario_id);
 
 			return res.status(200).json({
 				data: destino,

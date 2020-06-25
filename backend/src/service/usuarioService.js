@@ -80,13 +80,20 @@ module.exports = {
 
     try {
       //CONFERIR SE JÁ NÃO ESTÁ EM ONDEFUI
+      const ondefui = await knex('ondefui_destinos_usuario')
+                              .where({usuario_id: usuario_id, destino_id: destino_id})
+                              .select('id');
+      if(!ondefui || ondefui.length != 0) {
+        throw new Error('Destino já visitado');
+      }
+
       const retorno = await knex('queroir_destinos_usuario')
                               .returning('id')
                               .insert(destino);
-      const destino_id = retorno[0];
+      const queroir_id = retorno[0];
 
       return ({
-        id: destino_id,
+        id: queroir_id,
         destino: destino,
       });
     } catch(err) {

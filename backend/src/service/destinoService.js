@@ -57,7 +57,7 @@ module.exports = {
     if(!usuario_id) throw new Error('Usuário não fornecido');
 
     try {
-      let retorno = await knex('destinos')
+      const retorno = await knex('destinos')
                             .where('id', id)
                             .select('numNotas', 'nota');
       let numNotas = retorno[0].numNotas;
@@ -71,12 +71,17 @@ module.exports = {
       const trx = await knex.transaction();
       await trx('ondefui_destinos_usuario')
               .where({usuario_id: usuario_id, destino_id: id})
-              .update({nota: notaNova});
-      retorno = await trx('destinos')
-                  .where({id: id})
-                  .update({nota: notaNova, numNotas: numNotas}, ['id', 'nome', 'nota']);
+              .update({nota: nota});
+
+      const novoDestinoRetorno = await trx('destinos')
+                                        .where({id: id})
+                                        .update({nota: notaNova, numNotas: numNotas}, ['id', 'nome', 'nota']);
+      if(!novoDestinoRetorno) {
+        await trx.rollback();
+        throw new Error('Não foi possível atualizar a nota');
+      }
       await trx.commit();
-      const novoDestino = retorno[0];
+      const novoDestino = novoDestinoRetorno[0];
 
       return ({
         destino: novoDestino,

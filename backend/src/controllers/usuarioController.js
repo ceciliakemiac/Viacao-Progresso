@@ -1,17 +1,16 @@
 const usuarioService = require('../service/usuarioService');
-const { addWantedDestino } = require('../service/usuarioService');
 
 module.exports = {
 	async create(req, res) {
 		const { nome, email, senha } = req.body;
-		
+
 		try {
 			const { usuario } = await usuarioService.create(nome, email, senha);
 
 			return res.status(200).json({
 				usuario: usuario,
 			})
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: 'Erro ao criar usuário',
 				err: err,
@@ -20,17 +19,17 @@ module.exports = {
 	},
 
 	async addDestino(req, res) {
-		const { favorito, destino_id } = req.body;
+		const { favorito, destino_id, nota } = req.body;
 		const usuario_id = req.user.id;
 
 		try {
-			const { id, destino } = await usuarioService.addDestino(favorito, destino_id, usuario_id);
+			const { id, destino } = await usuarioService.addDestino(favorito, destino_id, usuario_id, nota);
 
 			return res.status(200).json({
 				id: id,
 				...destino,
 			});
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: err.message,
 				erro: err,
@@ -49,7 +48,7 @@ module.exports = {
 				destino: id,
 				...destino,
 			});
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: err.message,
 				erro: err,

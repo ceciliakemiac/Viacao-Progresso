@@ -18,7 +18,7 @@ module.exports = {
 			return res.status(200).json({
 				data: serializedDestinos,
 			});
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: 'Erro ao encontrar os destinos',
 				erro: err,
@@ -41,7 +41,7 @@ module.exports = {
 			return res.status(200).json({
 				data: serializedDestinos,
 			});
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: 'Erro ao encontrar os destinos populares',
 				erro: err,
@@ -62,7 +62,7 @@ module.exports = {
 					comentarios: comentarios,
 				}
 			});
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: 'Erro ao encontrar o destino',
 				erro: err,
@@ -74,14 +74,14 @@ module.exports = {
 		const { id } = req.params;
 		const { nota } = req.body;
 		const usuario_id = req.user.id;
-		
+
 		try {
 			const { destino } = await destinoService.updateNota(nota, id, usuario_id);
 
 			return res.status(200).json({
 				data: destino,
 			});
-		} catch(err) {
+		} catch (err) {
 			return res.status(400).json({
 				message: 'Erro ao atualizar a nota',
 				erro: err,

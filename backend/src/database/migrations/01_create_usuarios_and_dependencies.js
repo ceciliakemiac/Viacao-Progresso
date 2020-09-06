@@ -7,7 +7,7 @@ module.exports = {
       table.string('email').unique().notNullable();
       table.string('nome').unique().notNullable();
       table.string('senha').notNullable();
-      table.timestamps();
+      table.timestamps().defaultTo(knex.fn.now());
     }).createTable('ondefui_destinos_usuario', table => {
       table.increments('id').primary();
       table.boolean('favorito').notNullable();

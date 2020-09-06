@@ -1,8 +1,9 @@
 const knex = require('../database/connection');
+const { update } = require('../database/connection');
 
 module.exports = {
   async create(nome, email, senha) {
-    if(!nome || !email || !senha) {
+    if (!nome || !email || !senha) {
       throw new Error('Informações do usuário não fornecidas');
     }
 
@@ -18,41 +19,44 @@ module.exports = {
       return ({
         usuario: usuario[0],
       })
-    } catch(err) {
+    } catch (err) {
       throw err;
     }
   },
 
-  async addDestino(favorito, destino_id, usuario_id) {
-    if(!favorito) favorito = false;
-    if(!usuario_id) throw new Error('Usuário não fornecido');
-    if(!destino_id) throw new Error('Destino não fornecido');
+  async addDestino(favorito, destino_id, usuario_id, nota) {
+    if (!favorito) favorito = false;
+    if (!usuario_id) throw new Error('Usuário não fornecido');
+    if (!destino_id) throw new Error('Destino não fornecido');
+
+    if (!nota) nota = null;
 
     const destino = {
       favorito: favorito,
       destino_id: destino_id,
       usuario_id: usuario_id,
+      nota: nota,
     }
 
-    try{
+    try {
       //CONFERIR SE ESTÁ EM QUEROIR PARA DELETAR
       const trx = await knex.transaction();
       const queroir = await trx('queroir_destinos_usuario')
-                              .where({usuario_id: usuario_id, destino_id: destino_id})
-                              .select('id');
-      if(queroir.length != 0) {
+        .where({ usuario_id: usuario_id, destino_id: destino_id })
+        .select('id');
+      if (queroir.length != 0) {
         const id = queroir[0].id;
 
         await trx('queroir_destinos_usuario')
-                .where('id', id)
-                .del();
+          .where('id', id)
+          .del();
       }
 
       const ondefui = await trx('ondefui_destinos_usuario')
-                        .returning('id')
-                        .insert(destino);
-                    
-      if(!ondefui) {
+        .returning('id')
+        .insert(destino);
+
+      if (!ondefui) {
         await trx.rollback();
         throw new Error('Não foi possível adicionar destino');
       }
@@ -63,16 +67,16 @@ module.exports = {
         id: ondefui_id,
         destino: destino,
       });
-    } catch(err) {
-      throw err;
+    } catch (err) {
+      throw new Error('Não foi possível adicionar destino');
     }
   },
 
   async addWantedDestino(destino_id, usuario_id) {
-    if(!destino_id || !usuario_id) {
+    if (!destino_id || !usuario_id) {
       throw new Error('Dados não fornecidos');
     }
-    
+
     const destino = {
       destino_id: destino_id,
       usuario_id: usuario_id,
@@ -81,23 +85,43 @@ module.exports = {
     try {
       //CONFERIR SE JÁ NÃO ESTÁ EM ONDEFUI
       const ondefui = await knex('ondefui_destinos_usuario')
-                              .where({usuario_id: usuario_id, destino_id: destino_id})
-                              .select('id');
-      if(!ondefui || ondefui.length != 0) {
+        .where({ usuario_id: usuario_id, destino_id: destino_id })
+        .select('id');
+      if (!ondefui || ondefui.length != 0) {
         throw new Error('Destino já visitado');
       }
 
       const retorno = await knex('queroir_destinos_usuario')
-                              .returning('id')
-                              .insert(destino);
+        .returning('id')
+        .insert(destino);
       const queroir_id = retorno[0];
 
       return ({
         id: queroir_id,
         destino: destino,
       });
-    } catch(err) {
+    } catch (err) {
       throw err;
+    }
+  },
+
+  async userUpdatedNotaDestino(usuario_id, destino_id) {
+    if (!destino_id || !usuario_id) {
+      throw new Error('Usuário ou destino não fornecidos')
+    }
+
+    try {
+      const notas = await knex('ondefui_destinos_usuario')
+        .where({ usuario_id: usuario_id, destino_id: destino_id })
+        .select('nota');
+      const nota = notas[0].nota;
+
+      let updated = true;
+      if (!nota) updated = false;
+
+      return updated;
+    } catch (err) {
+      throw new Error('Erro ao descobrir se usuário já avaliou ou não o destino');
     }
   }
 }

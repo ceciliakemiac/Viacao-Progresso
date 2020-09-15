@@ -5,13 +5,13 @@ Sistema de gerenciamento e catalogação de viagens interestelares
     
 - Na primeira tela temos uma lista de planetas por default.
 - É possível, além de planetas, filtrar por estrelas, galáxias, constelações ou buracos negros.
-- Cada um desses objetos celestes é caracterizado por uma imagem e alguma descrição sobre ele, como distância para a Terra, nível de periculosidade, etc.
+- Cada um desses objetos celestes é caracterizado por uma imagem e pelo seu nome. Ao clicar nele, o usuário é direcionado para a segunda tela, onde é possível ter mais informações sobre ele, e também realizar algumas interações.
 - Caso o objeto celeste seja destruído, como por exemplo, uma estrela que explodiu ou um planeta que foi atingido por um meteoro, ele é adicionado à categoria de perdidos no tempo.
 
 ## Segunda Tela
     
 - É possível ver mais imagens sobre o objeto celeste escolhido, além de uma descrição mais completa sobre ele, como o clima, presença de extra terrestres, gravidade...
-- Se você, como usuário, tiver viajado para o objeto celeste em questão, é possível adicionar comentários sobre a sua experiência nele, por exemplo, e também avaliá-lo com uma nota.
+- Se você, como usuário, tiver viajado para o objeto celeste em questão, é possível adicioná-lo à sua lista de viagens e também é possível adicionar comentários sobre a sua experiência nele, por exemplo, e também avaliá-lo com uma nota.
 - É possível ver comentários que os outros usuários colocaram sobre ele, além da sua nota geral de avaliação.
 
 ## Terceira Tela (Tela do Usuário)

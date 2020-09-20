@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './App.css';
 import CorpoCeleste from './components/CorpoCeleste/CorpoCeleste';
@@ -6,7 +6,7 @@ import CorpoCeleste from './components/CorpoCeleste/CorpoCeleste';
 function App() {
   return (
     <div className="App">
-      <CorpoCeleste />
+      <CorpoCeleste fotoname="arcturus" name="Arcturus" />
     </div>
   );
 }

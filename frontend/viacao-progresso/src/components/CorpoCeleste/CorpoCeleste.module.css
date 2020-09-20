@@ -1,20 +1,28 @@
-.card {
-  border: 2px solid #063e58;
-  width: 300px;
-  height: 300px;
-}
-
-/* .card footer {
-  background-color: #333;
-  color: #063e58;
-} */
-
 .container {
-  padding: 2px 16px;
+  background-color: burlywood;
+  border: 2px solid #063e58;
+  box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
+  width: 350px;
+  height: 350px;
+  display: inline-block;
+  position: relative;
 }
 
-.card img {
-  object-fit: cover;
+.imagem {
+  width: 350px;
+  height: 310px;
+}
+
+.imagem img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+.text {
+  color: #063e58
+}
+
+p {
+  font-family: 'Questrial', sans-serif;
 }

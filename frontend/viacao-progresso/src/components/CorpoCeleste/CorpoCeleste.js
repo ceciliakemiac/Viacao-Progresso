@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './CorpoCeleste.module.css';
 
-const corpoCeleste = (props) => {
+const CorpoCeleste = (props) => {
 
   return (
     <div className={styles.container}>
@@ -16,4 +16,4 @@ const corpoCeleste = (props) => {
   )
 }
 
-export default corpoCeleste;
+export default CorpoCeleste;

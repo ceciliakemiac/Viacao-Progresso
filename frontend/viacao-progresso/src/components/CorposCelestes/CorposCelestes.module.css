@@ -1,0 +1,11 @@
+.corposGridContainer {
+  display: flex;
+  justify-content: center;
+} 
+
+.corposGrid {
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

@@ -2,15 +2,16 @@
   background-color: burlywood;
   border: 2px solid #063e58;
   box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   display: inline-block;
   position: relative;
+  margin: 5px;
 }
 
 .imagem {
-  width: 350px;
-  height: 310px;
+  width: 300px;
+  height: 260px;
 }
 
 .imagem img {

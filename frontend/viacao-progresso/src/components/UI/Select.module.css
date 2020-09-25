@@ -1,0 +1,25 @@
+.select {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  text-align: left;
+}
+
+.formSelect {
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background-color: #001f3f;
+  color: #fff9ec;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formSelect:focus {
+  outline: none;
+}

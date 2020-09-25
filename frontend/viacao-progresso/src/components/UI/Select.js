@@ -1,11 +1,11 @@
 import React from 'react';
 
-import styles from './Input.module.css';
+import styles from './Select.module.css';
 
 const Input = (props) => {
   return (
-    <div className={styles.Input}>
-      <select className={styles.Select} value={props.value} onChange={props.change}>
+    <div className={styles.select}>
+      <select className={styles.formSelect} value={props.value} onChange={props.change}>
         {props.options.map(option => (
           <option
             value={option.value}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Input from '../../components/UI/Input';
+import Select from '../../components/UI/Select';
 
 function Inicial(props) {
   const [options, setOptions] = useState([
@@ -19,8 +19,7 @@ function Inicial(props) {
 
   return (
     <div>
-      <Input
-        label={label}
+      <Select
         options={options}
         value={value}
         change={selectChangedHandler}

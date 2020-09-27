@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js",
-    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:seed": "knex --knexfile knexfile.ts seed:run"
+    "migrate:up": "npx knex migrate:up && npx knex migrate:up && npx knex migrate:up",
+    "migrate:down": "npx knex migrate:down && npx knex migrate:down && npx knex migrate:down",
+    "seed": "npx knex seed:run"
   },
   "keywords": [],
   "author": "",

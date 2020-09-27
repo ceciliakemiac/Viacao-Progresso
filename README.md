@@ -2,7 +2,9 @@
 Sistema de gerenciamento e catalogação de viagens interestelares
 
 ## Descrição
-Com sua nova linha de ônibus espaciais, que permite as pessoas uma facilidade de viajar intergalacticamente sem custos e preocupações. Como organizar suas viagens e saber qual o melhor destino a seguir? A Viação Progresso pode lhe ajudar! Você pode organizar os seus destinos, agendar suas viagens e obter informações sobre os diversos destinos. 
+Com sua nova linha de ônibus espaciais, que permite as pessoas uma facilidade de viajar intergalacticamente sem custos e preocupações. Como organizar suas viagens e saber qual o melhor destino a seguir? A Viação Progresso pode lhe ajudar! Você pode organizar os seus destinos, agendar suas viagens e obter informações sobre os diversos destinos.
+
+## Telas
 
 ### Primeira Tela 
     

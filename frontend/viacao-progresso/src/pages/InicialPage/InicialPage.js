@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import styles from './Inicial.module.css';
+import styles from './InicialPage.module.css';
 import axios from '../../service/axios';
 import Select from '../../components/UI/Select';
 import CorposCelestes from '../../components/CorposCelestes/CorposCelestes';
 
-function Inicial(props) {
+function InicialPage(props) {
   const [tiposOptions, setTiposOptions] = useState([
     { value: 1, displayValue: 'Planeta' },
     { value: 2, displayValue: 'Estrela' },
@@ -46,25 +46,27 @@ function Inicial(props) {
 
   return (
     <div className={styles.telaInicial}>
-      <div className={styles.selects}>
-        <Select
-          options={tiposOptions}
-          value={tipoValue}
-          change={selectTipoChangedHandler}
-        />
-        <Select
-          options={orderByOptions}
-          value={orderByOptionsValue}
-          change={selectOrderByChangedHandler}
-        />
-      </div>
-      <div>
-        <CorposCelestes
-          corposCelestes={corposCelestes}
-        />
+      <div className={styles.body}>
+        <div className={styles.selects}>
+          <Select
+            options={tiposOptions}
+            value={tipoValue}
+            change={selectTipoChangedHandler}
+          />
+          <Select
+            options={orderByOptions}
+            value={orderByOptionsValue}
+            change={selectOrderByChangedHandler}
+          />
+        </div>
+        <div className={styles.corpos}>
+          <CorposCelestes
+            corposCelestes={corposCelestes}
+          />
+        </div>
       </div>
     </div>
   );
 }
 
-export default Inicial;
+export default InicialPage;

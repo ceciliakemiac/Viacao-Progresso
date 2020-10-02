@@ -1,0 +1,24 @@
+.menuContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #001f3f;
+  color: #fff9ec;
+  height: 56px;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  margin-top: 10px;
+}
+
+.links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login {
+  margin-right: 10px;
+}

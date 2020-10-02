@@ -4,9 +4,20 @@
   flex-direction: column;
 }
 
+.body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 .selects {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  flex-direction: column;
+  width: 200px;
   height: 100%;
+}
+
+.corpos {
+  width: 100%px;
 }

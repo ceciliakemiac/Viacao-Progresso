@@ -21,6 +21,8 @@
 }
 
 .text {
+  display: flex;
+  justify-content: center;
   color: #063e58
 }
 

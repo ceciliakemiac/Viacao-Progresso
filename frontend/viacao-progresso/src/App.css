@@ -1,3 +1,7 @@
+body {
+  background-color: #aaaaaa;
+}
+
 .App {
   text-align: center;
   display: flex;

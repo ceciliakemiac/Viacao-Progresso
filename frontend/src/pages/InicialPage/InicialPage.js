@@ -28,6 +28,7 @@ function InicialPage(props) {
       let response = await axios
         .get(`/destinos?tipo=${tipoValue}&orderBy=${orderByOptionsValue}`)
         .catch((error) => console.log(error))
+      console.log(response)
       setCorposCelestes(response.data.data);
     };
     console.log(corposCelestes);

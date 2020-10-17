@@ -70,20 +70,4 @@ it("checks initial state", () => {
 
   const select = document.querySelector("[data-testid=select]");
   expect(select.innerHTML).toBe("Planeta");
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});

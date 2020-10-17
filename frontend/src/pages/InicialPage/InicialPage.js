@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import styles from './InicialPage.module.css';
-import axios from '../../service/axios';
+import BaseService from '../../service/axios';
 import Select from '../../components/UI/Select';
 import CorposCelestes from '../../components/CorposCelestes/CorposCelestes';
 
@@ -24,15 +24,10 @@ function InicialPage(props) {
   const [corposCelestes, setCorposCelestes] = useState([]);
 
   useEffect(() => {
-    let getCorpos = async () => {
-      let response = await axios
-        .get(`/destinos?tipo=${tipoValue}&orderBy=${orderByOptionsValue}`)
-        .catch((error) => console.log(error))
-      console.log(response)
-      setCorposCelestes(response.data.data);
-    };
-    console.log(corposCelestes);
-    getCorpos();
+    let path = `/destinos?tipo=${tipoValue}&orderBy=${orderByOptionsValue}`
+    BaseService.getCorpos(path)
+      .then(res => setCorposCelestes(res.data.data))
+      .catch(error => console.log(error))
   }, [tipoValue, orderByOptionsValue]);
 
   const selectTipoChangedHandler = (event) => {

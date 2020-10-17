@@ -9,7 +9,8 @@ const Input = (props) => {
         {props.options.map(option => (
           <option
             value={option.value}
-            key={option.value} >
+            key={option.value}
+            data-testid="select" >
             {option.displayValue}
           </option>
         ))}

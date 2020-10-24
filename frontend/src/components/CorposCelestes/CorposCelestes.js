@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import styles from './CorposCelestes.module.css';
-import { CorposContext } from '../../context/CorposContext';
+import { useCorposCelestes } from '../../context/CorposContext';
 import CorpoCeleste from '../CorpoCeleste/CorpoCeleste';
 
 function CorposCelestes(props) {
-  const { corposCelestes } = useContext(CorposContext);
+  const { corposCelestes } = useCorposCelestes();
 
   return (
     <div className={styles.corposGridContainer}>

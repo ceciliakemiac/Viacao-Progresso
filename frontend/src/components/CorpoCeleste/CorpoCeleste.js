@@ -10,7 +10,7 @@ function CorpoCeleste(props) {
   return (
     <div className={styles.container}>
       <div className={styles.imagem}>
-        <img src={`${props.imagem}`} />
+        <img src={`${props.imagem}`} alt="corpoCeleste" />
       </div>
       <div className={styles.text}>
         <p>{props.name}</p>

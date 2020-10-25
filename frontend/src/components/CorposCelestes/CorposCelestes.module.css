@@ -9,3 +9,7 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.corpos {
+  width: 100%px;
+}

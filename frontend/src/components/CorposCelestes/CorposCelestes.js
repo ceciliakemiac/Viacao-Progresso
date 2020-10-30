@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './CorposCelestes.module.css';
 import { useCorposCelestes } from '../../context/CorposContext';
@@ -13,11 +14,13 @@ function CorposCelestes(props) {
         {corposCelestes.map(corpo => {
           return (
             <div className={styles.corpos}>
-              <CorpoCeleste
-                key={corpo.id}
-                name={corpo.nome}
-                imagem={corpo.image_url}
-              />
+              <Link to={`/about-corpo/${corpo.id}`} >
+                <CorpoCeleste
+                  key={corpo.id}
+                  name={corpo.nome}
+                  imagem={corpo.image_url}
+                />
+              </Link>
             </div>
           );
         })}

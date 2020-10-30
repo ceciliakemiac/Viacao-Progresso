@@ -21,7 +21,7 @@ export function useCorposCelestes() {
 
   useEffect(() => {
     let path = `/destinos?tipo=${tipoValue}&orderBy=${orderByOptionsValue}`
-    BaseService.getCorpos(path)
+    BaseService.getServer(path)
       .then(res => setCorposCelestes(res.data.data))
       .catch(error => console.log(error))
   }, [tipoValue, orderByOptionsValue, setCorposCelestes]);

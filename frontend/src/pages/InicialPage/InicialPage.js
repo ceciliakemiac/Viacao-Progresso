@@ -6,7 +6,7 @@ import styles from './InicialPage.module.css';
 import Selects from '../../components/UI/Selects';
 import CorposCelestes from '../../components/CorposCelestes/CorposCelestes';
 
-function InicialPage(props) {
+const InicialPage = props => {
   return (
     <SelectProvider>
       <CorposProvider>

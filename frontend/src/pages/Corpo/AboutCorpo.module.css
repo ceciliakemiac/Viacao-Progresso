@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  justify-content: start;
+  margin: 0px 0px 30px;
+}
+
+.nome {
+  margin: 3% 10%;
+  font-size: 40px;
+  color:  #001f3f;
+}
+
+.infos {
+  margin: 20px 30px 20px 0px;
+  display: flex;
+  flex-direction: column;
+}

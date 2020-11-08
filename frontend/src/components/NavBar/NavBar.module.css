@@ -7,10 +7,6 @@
   width: 100%;
 }
 
-.logo {
-  cursor: pointer;
-}
-
 .menu {
   display: flex;
   justify-content: space-between;
@@ -23,6 +19,18 @@
   justify-content: flex-end;
 }
 
-.login {
-  margin-right: 10px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

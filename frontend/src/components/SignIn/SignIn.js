@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, makeStyles, Button } from '@material-ui/core';
 
 import styles from './SignIn.module.css';
 import BaseService from '../../service/axios';
-import { login } from '../../service/auth';
+import { isAuthenticated, login } from '../../service/auth';
+import { UsuarioContext } from '../../context/UsuarioContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,10 +21,7 @@ function SignIn(props) {
     email: '',
     senha: ''
   });
-
-  useEffect(() => {
-    console.log("[FORM DATA] " + formData.email + " " + formData.senha);
-  }, [formData]);
+  const { setAutenticado } = useContext(UsuarioContext);
 
   const dataChange = (event) => {
     const { name, value } = event.target;
@@ -36,14 +34,13 @@ function SignIn(props) {
   async function registrar(event) {
     event.preventDefault();
 
-    console.log("DATA")
-    console.log(formData)
-
     BaseService.login(formData)
       .then(response => {
-        console.log("RESPONSE TOKEN")
-        console.log(response.headers['x-auth-token'])
         login(response.headers['x-auth-token']);
+        if (isAuthenticated) {
+          setAutenticado(true);
+        }
+        props.close(false);
       })
       .catch(error => console.log(error));
   }

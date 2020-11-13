@@ -12,6 +12,15 @@ class BaseService {
 
     return response;
   }
+
+  postUsuario = async (body) => {
+    let url = `${this.baseUrl}/usuarios`;
+    let response = await axios.post(url, body)
+      .catch(error => console.log('[POST USUARIO ERROR] ' + error));
+
+    return response;
+  }
+
 }
 
 export default (new BaseService());

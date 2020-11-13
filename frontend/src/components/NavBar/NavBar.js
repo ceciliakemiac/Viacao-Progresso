@@ -19,6 +19,10 @@ function Menu(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
+  const close = (value) => {
+    setOpen(value);
+  }
+
   return (
     <nav className={styles.menuContainer}>
       <div className={styles.menu}>
@@ -33,7 +37,7 @@ function Menu(props) {
           </Button>
           <Button
             className={classes.button}
-            onClick={() => setOpen(true)} >Register</Button>
+            onClick={() => setOpen(true)} >Registrar</Button>
           <Modal
             open={open}
             onClose={() => setOpen(false)}
@@ -42,14 +46,14 @@ function Menu(props) {
             style={{ outline: 'none' }}>
             <div style={{
               position: 'absolute',
-              top: '10%',
-              left: '30%',
+              top: '15%',
+              left: '40%',
               width: 300, height: 300,
               overflow: 'auto',
               backgroundColor: 'white',
               border: 'none'
             }} >
-              <SignUp />
+              <SignUp close={setOpen} />
             </div>
           </Modal>
         </div>

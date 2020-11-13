@@ -5,6 +5,7 @@ import { Button, makeStyles } from '@material-ui/core';
 
 import styles from './NavBar.module.css';
 import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn';
 
 const useStyles = makeStyles({
   button: {
@@ -17,11 +18,8 @@ const useStyles = makeStyles({
 function Menu(props) {
   const history = useHistory();
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-
-  const close = (value) => {
-    setOpen(value);
-  }
+  const [regOpen, setRegOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   return (
     <nav className={styles.menuContainer}>
@@ -33,14 +31,33 @@ function Menu(props) {
         <div className={styles.links}>
           <Button
             className={classes.button}
-            style={{ marginRight: 10 }}  >Login
+            style={{ marginRight: 10 }}
+            onClick={() => setLoginOpen(true)} >Login
           </Button>
+          <Modal
+            open={loginOpen}
+            onClose={() => setLoginOpen(false)}
+            aria-labelledby="spring-modal-title"
+            aria-describedby="spring-modal-description"
+            style={{ outline: 'none' }}>
+            <div style={{
+              position: 'absolute',
+              top: '15%',
+              left: '40%',
+              width: 300, height: 250,
+              overflow: 'auto',
+              backgroundColor: 'white',
+              border: 'none'
+            }} >
+              <SignIn close={setLoginOpen} />
+            </div>
+          </Modal>
           <Button
             className={classes.button}
-            onClick={() => setOpen(true)} >Registrar</Button>
+            onClick={() => setRegOpen(true)} >Registrar</Button>
           <Modal
-            open={open}
-            onClose={() => setOpen(false)}
+            open={regOpen}
+            onClose={() => setRegOpen(false)}
             aria-labelledby="spring-modal-title"
             aria-describedby="spring-modal-description"
             style={{ outline: 'none' }}>
@@ -53,7 +70,7 @@ function Menu(props) {
               backgroundColor: 'white',
               border: 'none'
             }} >
-              <SignUp close={setOpen} />
+              <SignUp close={setRegOpen} />
             </div>
           </Modal>
         </div>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, makeStyles, Button } from '@material-ui/core';
 
-import styles from './SignUp.module.css';
+import styles from './SignIn.module.css';
 import BaseService from '../../service/axios';
+import { login } from '../../service/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,17 +14,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignUp(props) {
+function SignIn(props) {
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    nome: '',
     email: '',
     senha: ''
   });
-  const [erro, setErro] = useState('');
 
   useEffect(() => {
-    console.log("[FORM DATA] " + formData.nome + " " + formData.email + " " + formData.senha);
+    console.log("[FORM DATA] " + formData.email + " " + formData.senha);
   }, [formData]);
 
   const dataChange = (event) => {
@@ -36,40 +35,29 @@ function SignUp(props) {
 
   async function registrar(event) {
     event.preventDefault();
-    const { nome, email, senha } = formData
 
-    if (nome === '' || email === '' || senha === '') {
-      setErro('Preencha todos os campos para se registrar');
-    } else {
-      BaseService.postUsuario(formData)
-        .then(props.close(false))
-        .catch(setErro('Erro ao tentar te registrar no sistema'));
-    }
+    console.log("DATA")
+    console.log(formData)
+
+    BaseService.login(formData)
+      .then(response => {
+        console.log("RESPONSE TOKEN")
+        console.log(response.headers['x-auth-token'])
+        login(response.headers['x-auth-token']);
+      })
+      .catch(error => console.log(error));
   }
 
   return (
     <form className={classes.root} onSubmit={registrar} >
       <div className={styles.form} >
-        {console.log('NOME')}
-        {console.log(formData.nome)}
-        {console.log('ERRO')}
-        {console.log(erro)}
-        {erro && <p>{erro}</p>}
-        <TextField
-          label="Nome"
-          variant="outlined"
-          name="nome"
-          onChange={dataChange}
-          fullWidth
-          required
-          style={{ margin: 20 }}
-        />
         <TextField
           label="Email"
           variant="outlined"
           name="email"
           type="email"
           onChange={dataChange}
+          style={{ marginTop: 20 }}
           fullWidth
           required
         />
@@ -88,11 +76,11 @@ function SignUp(props) {
           color="primary"
           style={{ margin: 10 }}
         >
-          Registrar
+          Login
         </Button>
       </div>
     </form>
   );
 }
 
-export default SignUp;
+export default SignIn;

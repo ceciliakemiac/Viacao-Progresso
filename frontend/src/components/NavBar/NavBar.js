@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
-import { Button, makeStyles } from '@material-ui/core';
+import { Avatar, Button, makeStyles } from '@material-ui/core';
 
 import styles from './NavBar.module.css';
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn';
 import { logout } from '../../service/auth';
 import { UsuarioContext } from '../../context/UsuarioContext';
+import ImagemUsuario from '../../assets/avatar.jpg';
 
 const useStyles = makeStyles({
   button: {
@@ -22,16 +23,24 @@ function Menu(props) {
   const classes = useStyles();
   const [regOpen, setRegOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-  const { autenticado, setAutenticado } = useContext(UsuarioContext);
+  const { autenticado, setAutenticado, usuario, setUsuario } = useContext(UsuarioContext);
 
   const handleLogout = () => {
     logout();
     setAutenticado(false);
+    setUsuario({
+      "id": null,
+      "email": "",
+      "nome": "",
+      "senha": "",
+      "created_at": null,
+      "updated_at": null
+    })
   }
 
-  const navBarLogado = () => {
+  const navBarDeslogado = () => {
     return (
-      <div>
+      <div className={styles.links} >
         <Button
           className={classes.button}
           style={{ marginRight: 10 }}
@@ -81,14 +90,21 @@ function Menu(props) {
     );
   }
 
-  const navBarDeslogado = () => {
+  const navBarLogado = () => {
     return (
-      <div>
-        <Button
-          className={classes.button}
-          style={{ marginRight: 10 }}
-          onClick={() => handleLogout()} >Logout
-        </Button>
+      <div className={styles.links} >
+        {console.log("LOGADO:")}
+        {console.log(usuario)}
+        <Link to="/" >
+          <Button
+            className={classes.button}
+            style={{ marginRight: 20 }}
+            onClick={() => handleLogout()} >Logout
+          </Button>
+        </Link>
+        <Link to={`usuario/${usuario.id}`} >
+          <Avatar alt="perfil" src={ImagemUsuario} />
+        </Link>
       </div>
     );
   }
@@ -97,13 +113,13 @@ function Menu(props) {
     if (!autenticado) {
       return (
         <div>
-          {navBarLogado()}
+          {navBarDeslogado()}
         </div>
       );
     } else {
       return (
         <div>
-          {navBarDeslogado()}
+          {navBarLogado()}
         </div>
       );
     }

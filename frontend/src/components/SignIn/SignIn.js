@@ -21,7 +21,7 @@ function SignIn(props) {
     email: '',
     senha: ''
   });
-  const { setAutenticado } = useContext(UsuarioContext);
+  const { setAutenticado, setUsuario } = useContext(UsuarioContext);
 
   const dataChange = (event) => {
     const { name, value } = event.target;
@@ -37,9 +37,8 @@ function SignIn(props) {
     BaseService.login(formData)
       .then(response => {
         login(response.headers['x-auth-token']);
-        if (isAuthenticated) {
-          setAutenticado(true);
-        }
+        setAutenticado(true);
+        setUsuario(response.data.usuario);
         props.close(false);
       })
       .catch(error => console.log(error));

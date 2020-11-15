@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+
+import { UsuarioContext } from '../../context/UsuarioContext';
 
 const Usuario = (props) => {
+  const { usuario } = useContext(UsuarioContext);
+
   return (
     <div>
-      Oi
+      Oi {usuario.nome}
     </div>
   );
 }

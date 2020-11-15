@@ -62,7 +62,7 @@ function SignUp(props) {
           onChange={dataChange}
           fullWidth
           required
-          style={{ margin: 20 }}
+          style={{ marginTop: 20 }}
         />
         <TextField
           label="Email"

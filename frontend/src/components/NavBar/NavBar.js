@@ -102,7 +102,7 @@ function Menu(props) {
             onClick={() => handleLogout()} >Logout
           </Button>
         </Link>
-        <Link to={`usuario/${usuario.id}`} >
+        <Link to={`/usuario/${usuario.id}`} >
           <Avatar alt="perfil" src={ImagemUsuario} />
         </Link>
       </div>

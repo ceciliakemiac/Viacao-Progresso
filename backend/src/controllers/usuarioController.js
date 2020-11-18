@@ -19,11 +19,11 @@ module.exports = {
 	},
 
 	async addDestino(req, res) {
-		const { favorito, destino_id, nota } = req.body;
+		const { favorito, destino_id, nome, imagem, nota } = req.body;
 		const usuario_id = req.user.id;
 
 		try {
-			const { id, destino } = await usuarioService.addDestino(favorito, destino_id, usuario_id, nota);
+			const { id, destino } = await usuarioService.addDestino(favorito, destino_id, nome, imagem, usuario_id, nota);
 
 			return res.status(200).json({
 				id: id,
@@ -54,5 +54,30 @@ module.exports = {
 				erro: err,
 			});
 		}
+	},
+
+	async getUsuarioDestinos(req, res) {
+		const { id } = req.params;
+		try {
+			const destinos = await usuarioService.getUsuarioDestinos(id);
+
+			const serializedDestinos = destinos.map(destino => {
+				return {
+					id: destino.destino_id,
+					nome: destino.nome,
+					image_url: `http://localhost:8082/imagens/${destino.imagem}`,
+				}
+			});
+
+			return res.status(200).json({
+				data: serializedDestinos,
+			});
+		} catch (err) {
+			return res.status(400).json({
+				message: err.message,
+				erro: err,
+			});
+		}
 	}
+
 }

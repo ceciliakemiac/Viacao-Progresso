@@ -1,3 +1,4 @@
+const { getUsuarioDestinos } = require('../controllers/usuarioController');
 const knex = require('../database/connection');
 const { update } = require('../database/connection');
 
@@ -24,16 +25,18 @@ module.exports = {
     }
   },
 
-  async addDestino(favorito, destino_id, usuario_id, nota) {
+  async addDestino(favorito, id, nome, imagem, usuario_id, nota) {
     if (!favorito) favorito = false;
     if (!usuario_id) throw new Error('Usuário não fornecido');
-    if (!destino_id) throw new Error('Destino não fornecido');
+    if (!id) throw new Error('Destino não fornecido');
 
     if (!nota) nota = null;
 
     const destino = {
       favorito: favorito,
-      destino_id: destino_id,
+      destino_id: id,
+      nome: nome,
+      imagem: imagem,
       usuario_id: usuario_id,
       nota: nota,
     }
@@ -42,7 +45,7 @@ module.exports = {
       //CONFERIR SE ESTÁ EM QUEROIR PARA DELETAR
       const trx = await knex.transaction();
       const queroir = await trx('queroir_destinos_usuario')
-        .where({ usuario_id: usuario_id, destino_id: destino_id })
+        .where({ usuario_id: usuario_id, destino_id: id })
         .select('id');
       if (queroir.length != 0) {
         const id = queroir[0].id;
@@ -107,7 +110,7 @@ module.exports = {
 
   async userUpdatedNotaDestino(usuario_id, destino_id) {
     if (!destino_id || !usuario_id) {
-      throw new Error('Usuário ou destino não fornecidos')
+      throw new Error('Usuário ou destino não fornecidos');
     }
 
     try {
@@ -123,5 +126,21 @@ module.exports = {
     } catch (err) {
       throw new Error('Erro ao descobrir se usuário já avaliou ou não o destino');
     }
+  },
+
+  async getUsuarioDestinos(usuario_id) {
+    if (!usuario_id) {
+      throw new Error('Usuário não fornecido');
+    }
+
+    try {
+      const destinos = await knex('ondefui_destinos_usuario')
+        .where('usuario_id', usuario_id)
+        .select()
+      return destinos;
+    } catch (err) {
+      throw new Error('Erro ao pegar os destinos já visitados pelo usuário');
+    }
   }
+
 }

@@ -7,9 +7,10 @@ export const CorposContext = createContext();
 
 export default function CorposProvider({ children }) {
   const [corposCelestes, setCorposCelestes] = useState([]);
+  const [usuarioCorposCelestes, setUsuarioCorposCelestes] = useState([]);
 
   return (
-    <CorposContext.Provider value={{ corposCelestes, setCorposCelestes }} >
+    <CorposContext.Provider value={{ corposCelestes, setCorposCelestes, usuarioCorposCelestes, setUsuarioCorposCelestes }} >
       {children}
     </CorposContext.Provider>
   );
@@ -28,3 +29,31 @@ export function useCorposCelestes() {
 
   return { corposCelestes };
 };
+
+export function useUsuarioCorposCelestes() {
+  const { usuarioCorposCelestes, setUsuarioCorposCelestes } = useContext(CorposContext);
+
+  useEffect(() => {
+    BaseService.getUsuariosDestinos()
+      .then(res => setUsuarioCorposCelestes(res.data.data))
+      .catch(error => console.log(error))
+  }, [setUsuarioCorposCelestes]);
+
+  return { usuarioCorposCelestes };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

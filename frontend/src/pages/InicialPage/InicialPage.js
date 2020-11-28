@@ -1,23 +1,20 @@
 import React from 'react';
 
-import SelectProvider from '../../context/SelectContext';
-import CorposProvider from '../../context/CorposContext';
+import { useCorposCelestes } from '../../context/CorposContext';
 import styles from './InicialPage.module.css';
 import Selects from '../../components/UI/Selects';
 import CorposCelestes from '../../components/CorposCelestes/CorposCelestes';
 
 const InicialPage = props => {
+  const { corposCelestes } = useCorposCelestes()
+
   return (
-    <SelectProvider>
-      <CorposProvider>
-        <div className={styles.telaInicial} >
-          <div className={styles.body} >
-            <Selects />
-            <CorposCelestes />
-          </div>
-        </div>
-      </CorposProvider>
-    </SelectProvider>
+    <div className={styles.telaInicial} >
+      <div className={styles.body} >
+        <Selects />
+        <CorposCelestes corpos={corposCelestes} />
+      </div>
+    </div>
   );
 }
 

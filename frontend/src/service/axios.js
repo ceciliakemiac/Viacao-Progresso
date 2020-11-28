@@ -52,6 +52,17 @@ class BaseService {
       .catch(error => console.log('[DELETE USUARIO DESTINO ERRO] ' + error))
     return response;
   }
+
+  getUsuariosDestinos = async () => {
+    const url = `${this.baseUrl}/usuarios/destinos`;
+    const response = await axios.get(url, {
+      headers: {
+        'x-auth-token': getToken(),
+      }
+    })
+      .catch(error => console.log('[GET DESTINOS USUARIO ERRO] ' + error))
+    return response;
+  }
 }
 
 export default (new BaseService());

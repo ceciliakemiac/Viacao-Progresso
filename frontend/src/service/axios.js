@@ -38,10 +38,20 @@ class BaseService {
         'x-auth-token': getToken(),
       }
     })
-      .catch(error => console.log('[ADD USUARIO DESTIONO ERROR] ' + error))
+      .catch(error => console.log('[ADD USUARIO DESTINO ERROR] ' + error))
     return response;
   }
 
+  deleteUsuarioDestino = async (destino_id) => {
+    const url = `${this.baseUrl}/usuarios/ondefui/${destino_id}`;
+    const response = await axios.delete(url, {
+      headers: {
+        'x-auth-token': getToken(),
+      }
+    })
+      .catch(error => console.log('[DELETE USUARIO DESTINO ERRO] ' + error))
+    return response;
+  }
 }
 
 export default (new BaseService());

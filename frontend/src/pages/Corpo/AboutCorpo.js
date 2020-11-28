@@ -50,6 +50,10 @@ const AboutCorpo = props => {
       BaseService.addUsuarioDestino(usuarioDestino)
         .then(res => console.log("HANDLE FUI: ", res))
         .catch(error => console.log("HANDLE FUI ERROR: ", error));
+    } else {
+      BaseService.deleteUsuarioDestino(id)
+        .then(res => console.log("DESTINO DELETADO: ", res))
+        .catch(error => console.log("DESTINO NÂO DELETADO: ", error));
     }
   }, [fui])
 

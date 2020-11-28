@@ -75,7 +75,7 @@ module.exports = {
 	},
 
 	async getUsuarioDestinos(req, res) {
-		const { id } = req.params;
+		const id = req.user.id;
 		try {
 			const destinos = await usuarioService.getUsuarioDestinos(id);
 
@@ -83,7 +83,7 @@ module.exports = {
 				return {
 					id: destino.destino_id,
 					nome: destino.nome,
-					image_url: `http://localhost:8082/imagens/${destino.imagem}`,
+					image_url: `${destino.imagem}`,
 				}
 			});
 

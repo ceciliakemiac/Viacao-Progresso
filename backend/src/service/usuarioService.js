@@ -1,4 +1,4 @@
-const { getUsuarioDestinos } = require('../controllers/usuarioController');
+const { getUsuarioDestinos, deleteDestino } = require('../controllers/usuarioController');
 const knex = require('../database/connection');
 const { update } = require('../database/connection');
 
@@ -72,6 +72,22 @@ module.exports = {
       });
     } catch (err) {
       throw new Error('Não foi possível adicionar destino');
+    }
+  },
+
+  async deleteDestino(destino_id, usuario_id) {
+    if (!destino_id || !usuario_id) throw new Error('Destino ou Usuário não fornecidos');
+
+    try {
+      const deleted = await knex('ondefui_destinos_usuario')
+        .where({ usuario_id: usuario_id, destino_id: destino_id })
+        .del()
+
+      return ({
+        deleted: deleted,
+      });
+    } catch (error) {
+      throw error;
     }
   },
 

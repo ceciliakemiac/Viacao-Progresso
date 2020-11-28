@@ -6,18 +6,18 @@ module.exports = {
     const usuario_id = req.user.id;
 
     try {
-      const { comentario_id, newComentario } = 
+      const { comentario_id, newComentario } =
         await comentarioService.create(comentario, usuario_id, destino_id);
-    
+
       return res.status(200).json({
         id: comentario_id,
         ...newComentario,
       })
-    } catch(err) {
+    } catch (err) {
       return res.status(400).json({
-				message: 'Erro ao adicionar comentário',
-				erro: err,
-			});
+        message: 'Erro ao adicionar comentário',
+        erro: err,
+      });
     }
   },
 
@@ -31,12 +31,12 @@ module.exports = {
       return res.status(200).json({
         deleted: deleted,
       })
-    } catch(err) {
+    } catch (err) {
       return res.status(400).json({
         message: err.message,
         erro: err,
       })
     }
   },
-  
+
 }

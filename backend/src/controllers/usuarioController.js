@@ -37,6 +37,24 @@ module.exports = {
 		}
 	},
 
+	async deleteDestino(req, res) {
+		const { id } = req.params;
+		const usuario_id = req.user.id;
+
+		try {
+			const deleted = await usuarioService.deleteDestino(id, usuario_id);
+
+			return res.status(200).json({
+				deleted: deleted,
+			});
+		} catch (error) {
+			return res.status(400).json({
+				message: error.message,
+				error: error,
+			});
+		}
+	},
+
 	async addWantedDestino(req, res) {
 		const { destino_id } = req.body;
 		const usuario_id = req.user.id;

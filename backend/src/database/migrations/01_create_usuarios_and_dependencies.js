@@ -14,6 +14,8 @@ module.exports = {
       table.float('nota');
       table.integer('usuario_id').references('usuarios.id');
       table.integer('destino_id').references('destinos.id');
+      table.string('nome').notNullable();
+      table.string('imagem').notNullable();
     }).createTable('queroir_destinos_usuario', table => {
       table.increments('id').primary();
       table.integer('usuario_id').references('usuarios.id');

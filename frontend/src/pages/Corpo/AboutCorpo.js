@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SlideShow from 'react-image-show';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import styles from './AboutCorpo.module.css';
 import BaseService from '../../service/axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Typography } from '@material-ui/core';
 
 const AboutCorpo = props => {
   const { id } = useParams();
@@ -20,6 +23,7 @@ const AboutCorpo = props => {
     tipo: ''
   });
   const [imagens, setImagens] = useState([]);
+  const [fui, setFui] = useState(false);
 
   useEffect(() => {
     let path = `/destinos/${id}`;
@@ -34,8 +38,35 @@ const AboutCorpo = props => {
       .catch(error => console.log(error))
   }, [id]);
 
+  useEffect(() => {
+    BaseService.getFuiOuNaoFui(id)
+      .then(res => setFui(res.data.fui))
+      .catch(error => console.log("USE EFFETC FUI " + error));
+  }, []);
+
+  const handleFui = () => {
+    setFui(!fui)
+    if (!fui) {
+      const usuarioDestino = {
+        favorito: false,
+        destino_id: id,
+        nome: corpo.nome,
+        imagem: imagens[0]
+      }
+      console.log("USUARIO DESTINO: ", usuarioDestino)
+      BaseService.addUsuarioDestino(usuarioDestino)
+        .then(res => console.log("HANDLE FUI: ", res))
+        .catch(error => console.log("HANDLE FUI ERROR: ", error));
+    } else {
+      BaseService.deleteUsuarioDestino(id)
+        .then(res => console.log("DESTINO DELETADO: ", res))
+        .catch(error => console.log("DESTINO NÂO DELETADO: ", error));
+    }
+  }
+
   return (
     <div >
+      {console.log("FUI ", fui)}
       <h2 className={styles.nome} >{corpo.nome}</h2>
       <div className={styles.main}>
         <SlideShow
@@ -50,8 +81,21 @@ const AboutCorpo = props => {
         />
         <div className={styles.infos} >
           {corpo.descricao}
-          {/* <FontAwesomeIcon icon={["fas", "coffee"]} /> */}
-          {/* not working ?? */}
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }} >
+            <FormGroup row >
+              <FormControlLabel style={{ margin: 10 }}
+                control={
+                  <Checkbox
+                    style={{ marginRight: 10, color: '#001f3f' }}
+                    checked={fui}
+                    onChange={handleFui}
+                    value="fui"
+                  />
+                }
+                label={<Typography style={{ color: '#001f3f', fontWeight: "bold", fontSize: '20px' }} >Já Fui</Typography>}
+              />
+            </FormGroup>
+          </div>
         </div>
       </div>
     </div >

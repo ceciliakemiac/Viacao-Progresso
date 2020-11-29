@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import UsuarioProvider from '../src/context/UsuarioContext';
+
 // import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UsuarioProvider>
+      <App />
+    </UsuarioProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

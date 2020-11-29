@@ -9,5 +9,6 @@ router.post('/ondefui', auth, usuarioController.addDestino);
 router.post('/queroir', auth, usuarioController.addWantedDestino);
 router.get('/destinos', auth, usuarioController.getUsuarioDestinos);
 router.delete('/ondefui/:id', auth, usuarioController.deleteDestino);
+router.get('/ondefui/:id', auth, usuarioController.getUsuarioDestino);
 
 module.exports = router;

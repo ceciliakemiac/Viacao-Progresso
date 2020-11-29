@@ -39,7 +39,14 @@ const AboutCorpo = props => {
   }, [id]);
 
   useEffect(() => {
-    if (fui) {
+    BaseService.getFuiOuNaoFui(id)
+      .then(res => setFui(res.data.fui))
+      .catch(error => console.log("USE EFFETC FUI " + error));
+  }, []);
+
+  const handleFui = () => {
+    setFui(!fui)
+    if (!fui) {
       const usuarioDestino = {
         favorito: false,
         destino_id: id,
@@ -55,10 +62,6 @@ const AboutCorpo = props => {
         .then(res => console.log("DESTINO DELETADO: ", res))
         .catch(error => console.log("DESTINO NÂO DELETADO: ", error));
     }
-  }, [fui])
-
-  const handleFui = () => {
-    setFui(!fui)
   }
 
   return (

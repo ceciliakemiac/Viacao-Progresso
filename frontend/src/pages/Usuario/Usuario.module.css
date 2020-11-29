@@ -1,0 +1,17 @@
+.usuario {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.corpos {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.nome {
+  margin: 2% 1.5%;
+  font-size: 20px;
+  color:  #001f3f;
+}

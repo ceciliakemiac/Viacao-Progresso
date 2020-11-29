@@ -76,8 +76,10 @@ module.exports = {
 
 	async getUsuarioDestinos(req, res) {
 		const id = req.user.id;
+		const { tipo, orderBy } = req.query;
+
 		try {
-			const destinos = await usuarioService.getUsuarioDestinos(id);
+			const destinos = await usuarioService.getUsuarioDestinos(id, tipo, orderBy);
 
 			const serializedDestinos = destinos.map(destino => {
 				return {
@@ -94,6 +96,24 @@ module.exports = {
 			return res.status(400).json({
 				message: err.message,
 				erro: err,
+			});
+		}
+	},
+
+	async getUsuarioDestino(req, res) {
+		const { id } = req.params;
+		const usuario_id = req.user.id;
+
+		try {
+			const tamanhoDestino = await usuarioService.getUsuarioDestino(id, usuario_id);
+
+			return res.status(200).json({
+				fui: tamanhoDestino,
+			});
+		} catch (error) {
+			return res.status(400).json({
+				message: error.message,
+				erro: error,
 			});
 		}
 	}

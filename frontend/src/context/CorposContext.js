@@ -32,12 +32,14 @@ export function useCorposCelestes() {
 
 export function useUsuarioCorposCelestes() {
   const { usuarioCorposCelestes, setUsuarioCorposCelestes } = useContext(CorposContext);
+  const { tipoValue, orderByOptionsValue } = useContext(SelectContext);
 
   useEffect(() => {
-    BaseService.getUsuariosDestinos()
+    let path = `/usuarios/destinos?tipo=${tipoValue}&orderBy=${orderByOptionsValue}`
+    BaseService.getUsuariosDestinos(path)
       .then(res => setUsuarioCorposCelestes(res.data.data))
       .catch(error => console.log(error))
-  }, [setUsuarioCorposCelestes]);
+  }, [tipoValue, orderByOptionsValue, setUsuarioCorposCelestes]);
 
   return { usuarioCorposCelestes };
 }

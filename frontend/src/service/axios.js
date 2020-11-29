@@ -53,14 +53,28 @@ class BaseService {
     return response;
   }
 
-  getUsuariosDestinos = async () => {
-    const url = `${this.baseUrl}/usuarios/destinos`;
+  getUsuariosDestinos = async (path) => {
+    const url = `${this.baseUrl}${path}`;
     const response = await axios.get(url, {
       headers: {
         'x-auth-token': getToken(),
       }
     })
       .catch(error => console.log('[GET DESTINOS USUARIO ERRO] ' + error))
+    console.log("USUARIOS DESTINOS " + response.data);
+    return response;
+  }
+
+  getFuiOuNaoFui = async (destino_id) => {
+    const url = `${this.baseUrl}/usuarios/ondefui/${destino_id}`;
+    const response = await axios.get(url, {
+      headers: {
+        'x-auth-token': getToken(),
+      }
+    })
+      .catch(error => console.log('[GET FUI OU NAO FUI] ' + error))
+
+    console.log("RESPONSE FUI " + response.data.fui);
     return response;
   }
 }

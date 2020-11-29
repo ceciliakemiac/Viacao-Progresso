@@ -1,4 +1,4 @@
-const { getUsuarioDestinos, deleteDestino } = require('../controllers/usuarioController');
+const { getUsuarioDestinos, deleteDestino, getUsuarioDestino } = require('../controllers/usuarioController');
 const knex = require('../database/connection');
 const { update } = require('../database/connection');
 
@@ -144,18 +144,43 @@ module.exports = {
     }
   },
 
-  async getUsuarioDestinos(usuario_id) {
+  async getUsuarioDestinos(usuario_id, tipo, orderBy) {
     if (!usuario_id) {
       throw new Error('Usuário não fornecido');
     }
+    if (!tipo) tipo = 1;
+    if (!orderBy) orderBy = 'nome';
+    orderBy = 'destinos.' + orderBy;
 
+    console.log("USUARIO ID " + usuario_id + " TIPO " + tipo + " ORDERBY " + orderBy)
     try {
       const destinos = await knex('ondefui_destinos_usuario')
-        .where('usuario_id', usuario_id)
+        .join('destinos', 'ondefui_destinos_usuario.destino_id', '=', 'destinos.id')
         .select()
+        .where('tipo', tipo)
+        .where('usuario_id', usuario_id)
+        .orderBy(orderBy)
+      // .where({ usuario_id: usuario_id, 'destinos.tipo': tipo })
+      // .orderBy(orderBy)
+
       return destinos;
     } catch (err) {
       throw new Error('Erro ao pegar os destinos já visitados pelo usuário');
+    }
+  },
+
+  async getUsuarioDestino(destino_id, usuario_id) {
+    if (!destino_id || !usuario_id) throw new Error('Usuário ou destino não fornecidos');
+
+    try {
+      const destino = await knex('ondefui_destinos_usuario')
+        .where({ usuario_id: usuario_id, destino_id: destino_id })
+        .select()
+
+      console.log(destino.length);
+      return destino.length == 1;
+    } catch (error) {
+      throw new Error('Erro ao verificar se usuário já viajou para o destino');
     }
   }
 

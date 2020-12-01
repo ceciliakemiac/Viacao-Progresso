@@ -9,10 +9,14 @@ const InicialPage = props => {
   const { corposCelestes } = useCorposCelestes()
 
   return (
-    <div className={styles.telaInicial} >
-      <div className={styles.body} >
-        <Selects />
-        <CorposCelestes corpos={corposCelestes} />
+    <div className={styles.telaInicial} style={{ width: '100%' }} >
+      <div className={styles.body} style={{ width: '100%', margin: 10 }} >
+        <div style={{ width: '17%', height: '25%' }}>
+          <Selects />
+        </div>
+        <div style={{ width: '83%' }} >
+          <CorposCelestes corpos={corposCelestes} />
+        </div>
       </div>
     </div>
   );

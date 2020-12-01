@@ -1,12 +1,13 @@
 .corposGridContainer {
   display: flex;
   justify-content: center;
+  margin-left: 5%;
 } 
 
 .corposGrid {
-  width: 1000px;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   flex-wrap: wrap;
 }
 

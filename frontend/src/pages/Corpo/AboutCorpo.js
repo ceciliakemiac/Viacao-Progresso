@@ -68,7 +68,7 @@ const AboutCorpo = props => {
     <div >
       {console.log("FUI ", fui)}
       <h2 className={styles.nome} >{corpo.nome}</h2>
-      <div className={styles.main}>
+      <div className={styles.main} style={{ width: '100%' }}>
         <SlideShow
           images={imagens}
           width="700px"
@@ -79,9 +79,9 @@ const AboutCorpo = props => {
           fixedImagesHeight
           indicators
         />
-        <div className={styles.infos} >
+        <div className={styles.infos} style={{ width: '50%', height: '550px' }} >
           {corpo.descricao}
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }} >
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} >
             <FormGroup row >
               <FormControlLabel style={{ margin: 10 }}
                 control={

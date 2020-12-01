@@ -127,7 +127,7 @@ function Menu(props) {
 
   return (
     <nav className={styles.menuContainer}>
-      <div className={styles.menu}>
+      <div className={styles.menu} style={{ marginLeft: '3%', marginRight: '5%' }}>
         <Button
           className={classes.button}
           onClick={() => history.push('/')} >Viação Progresso

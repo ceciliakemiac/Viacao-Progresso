@@ -14,10 +14,14 @@ const Usuario = (props) => {
     <div>
       <h4 className={styles.nome} >Suas Viagens, {usuario.nome}!</h4>
       {console.log("USUARIO NOME: " + usuario.nome)}
-      <div className={styles.usuario} >
-        <div className={styles.corpos} >
-          <Selects />
-          <CorposCelestes corpos={usuarioCorposCelestes} />
+      <div className={styles.usuario} style={{ width: '100%' }} >
+        <div className={styles.corpos} style={{ width: '100%' }} >
+          <div style={{ width: '17%', height: '25%' }} >
+            <Selects />
+          </div>
+          <div style={{ width: '83%' }} >
+            <CorposCelestes corpos={usuarioCorposCelestes} />
+          </div>
         </div>
       </div>
     </div>
